@@ -5,6 +5,11 @@ import About from "./pages/About";
 import Guidelines from "./pages/Guidelines";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import Topics from "./pages/Topics";
+import Dashboard from "./pages/Dashboard";
+import Editor from "./pages/Editor";
+import ToDo from "./pages/ToDo";
+import Profile from "./pages/Profile";
 import SignInModal from "./components/SignInModal";
 import SuccessModal from "./components/SuccessModal";
 import NotFound from "./pages/NotFound";
@@ -29,7 +34,7 @@ const AppContent = () => {
 
   const handleLoginFromSuccess = () => {
     setIsSuccessOpen(false);
-    setIsSignInOpen(true);
+    navigate("/topics");
   };
 
   const handleLoginClick = () => {
@@ -52,6 +57,11 @@ const AppContent = () => {
             />
           } 
         />
+        <Route path="/topics" element={<Topics />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/todo" element={<ToDo />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       
