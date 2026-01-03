@@ -1,9 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+interface PublishedContent {
+  title: string;
+  content: string;
+  image: string | null;
+  fontSize: string;
+  textColor: string;
+  isBold: boolean;
+  isItalic: boolean;
+  isUnderline: boolean;
+  fontFamily: string;
+  publishedAt: string;
+}
 
 const Profile = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("publish");
+  const [publishedContent, setPublishedContent] = useState<PublishedContent | null>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('nara_published_content');
+    if (saved) {
+      setPublishedContent(JSON.parse(saved));
+    }
+  }, []);
+
+  const getTextStyle = (content: PublishedContent) => ({
+    fontSize: `${content.fontSize}px`,
+    color: content.textColor,
+    fontWeight: content.isBold ? 'bold' : 'normal',
+    fontStyle: content.isItalic ? 'italic' : 'normal',
+    textDecoration: content.isUnderline ? 'underline' : 'none',
+    fontFamily: content.fontFamily,
+  });
 
   return (
     <div className="profile-page">
@@ -62,11 +92,37 @@ const Profile = () => {
         <aside className="profile-sidebar">
           <div className="about-card">
             <h3 className="about-card-title">About</h3>
-            <p className="about-text">
-              Hello! I love writing about anything and everything. 
-              But with NARA, I will be sharing stories about the 
-              things that drive me in life.
-            </p>
+            {publishedContent ? (
+              <div className="published-content">
+                {publishedContent.image && (
+                  <img 
+                    src={publishedContent.image} 
+                    alt="Published" 
+                    className="published-image"
+                  />
+                )}
+                {publishedContent.title && (
+                  <h4 
+                    className="published-title"
+                    style={getTextStyle(publishedContent)}
+                  >
+                    {publishedContent.title}
+                  </h4>
+                )}
+                <p 
+                  className="about-text"
+                  style={getTextStyle(publishedContent)}
+                >
+                  {publishedContent.content || "Hello! I love writing about anything and everything. But with NARA, I will be sharing stories about the things that drive me in life."}
+                </p>
+              </div>
+            ) : (
+              <p className="about-text">
+                Hello! I love writing about anything and everything. 
+                But with NARA, I will be sharing stories about the 
+                things that drive me in life.
+              </p>
+            )}
             <h3 className="find-me-title">Find me on</h3>
             <div className="social-links">
               <a href="#" className="social-link">
