@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
+import fontNara from "@/assets/fontnara.png";
 
 const ToDo = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [todos, setTodos] = useState([
     { id: 1, text: "Write today's journal", checked: false },
     { id: 2, text: "Read 1 new post", checked: false },
@@ -21,17 +24,38 @@ const ToDo = () => {
     );
   };
 
+  const highlightText = (text: string) => {
+    if (!searchQuery.trim()) return text;
+    const regex = new RegExp(`(${searchQuery})`, 'gi');
+    const parts = text.split(regex);
+    return parts.map((part, i) => 
+      regex.test(part) ? <mark key={i} className="search-highlight">{part}</mark> : part
+    );
+  };
+
   return (
     <div className="dashboard-page">
       <header className="dashboard-header">
         <div className="dashboard-header-left">
-          <h1 className="dashboard-logo">NARA</h1>
-          <div className="search-bar">
+          <img src={fontNara} alt="NARA" className="dashboard-logo-img" onClick={() => navigate("/dashboard")} />
+          <div className="search-bar" onClick={() => setIsSearching(true)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/>
               <path d="m21 21-4.35-4.35"/>
             </svg>
-            <span>Search</span>
+            {isSearching ? (
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onBlur={() => !searchQuery && setIsSearching(false)}
+                autoFocus
+              />
+            ) : (
+              <span>Search</span>
+            )}
           </div>
         </div>
         <nav className="dashboard-nav">
@@ -51,8 +75,8 @@ const ToDo = () => {
           </button>
           <button className="nav-item active" onClick={() => navigate("/todo")}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <path d="M9 12l2 2 4-4"/>
             </svg>
             To-Do
           </button>
@@ -72,7 +96,7 @@ const ToDo = () => {
       </header>
 
       <main className="todo-page-content">
-        <h2 className="todo-page-title">Your To-Do List</h2>
+        <h2 className="todo-page-title">{highlightText("Your To-Do List")}</h2>
         <div className="todo-full-list">
           {todos.map(todo => (
             <div key={todo.id} className="todo-full-item">
@@ -82,7 +106,7 @@ const ToDo = () => {
                 onChange={() => toggleTodo(todo.id)}
                 className="todo-checkbox-lg"
               />
-              <span className={todo.checked ? 'completed' : ''}>{todo.text}</span>
+              <span className={todo.checked ? 'completed' : ''}>{highlightText(todo.text)}</span>
             </div>
           ))}
         </div>

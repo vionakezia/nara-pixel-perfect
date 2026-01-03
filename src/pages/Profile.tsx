@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import fontNara from "@/assets/fontnara.png";
 
 interface PublishedContent {
   title: string;
@@ -18,6 +19,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("publish");
   const [publishedContent, setPublishedContent] = useState<PublishedContent | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('nara_published_content');
@@ -35,16 +38,44 @@ const Profile = () => {
     fontFamily: content.fontFamily,
   });
 
+  const highlightText = (text: string) => {
+    if (!searchQuery.trim()) return text;
+    const regex = new RegExp(`(${searchQuery})`, 'gi');
+    const parts = text.split(regex);
+    return parts.map((part, i) => 
+      regex.test(part) ? <mark key={i} className="search-highlight">{part}</mark> : part
+    );
+  };
+
+  const defaultAboutText = "Hello! I love writing about anything and everything. But with NARA, I will be sharing stories about the things that drive me in life.";
+
   return (
     <div className="profile-page">
       <header className="profile-header">
-        <h1 className="profile-logo" onClick={() => navigate("/dashboard")}>NARA</h1>
-        <div className="profile-search">
+        <img 
+          src={fontNara} 
+          alt="NARA" 
+          className="profile-logo-img" 
+          onClick={() => navigate("/dashboard")}
+        />
+        <div className="profile-search" onClick={() => setIsSearching(true)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8"/>
             <path d="m21 21-4.35-4.35"/>
           </svg>
-          <span>Search</span>
+          {isSearching ? (
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onBlur={() => !searchQuery && setIsSearching(false)}
+              autoFocus
+            />
+          ) : (
+            <span>Search</span>
+          )}
         </div>
         <button className="profile-nav-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -64,7 +95,7 @@ const Profile = () => {
           />
           <button className="avatar-add-btn">+</button>
         </div>
-        <h2 className="profile-username">Hello, [Username]</h2>
+        <h2 className="profile-username">{highlightText("Hello, [Username]")}</h2>
       </section>
 
       <nav className="profile-tabs">
@@ -91,7 +122,7 @@ const Profile = () => {
       <main className="profile-content">
         <aside className="profile-sidebar">
           <div className="about-card">
-            <h3 className="about-card-title">About</h3>
+            <h3 className="about-card-title">{highlightText("About")}</h3>
             {publishedContent ? (
               <div className="published-content">
                 {publishedContent.image && (
@@ -106,24 +137,22 @@ const Profile = () => {
                     className="published-title"
                     style={getTextStyle(publishedContent)}
                   >
-                    {publishedContent.title}
+                    {highlightText(publishedContent.title)}
                   </h4>
                 )}
                 <p 
                   className="about-text"
                   style={getTextStyle(publishedContent)}
                 >
-                  {publishedContent.content || "Hello! I love writing about anything and everything. But with NARA, I will be sharing stories about the things that drive me in life."}
+                  {highlightText(publishedContent.content || defaultAboutText)}
                 </p>
               </div>
             ) : (
-              <p className="about-text">
-                Hello! I love writing about anything and everything. 
-                But with NARA, I will be sharing stories about the 
-                things that drive me in life.
+              <p className="about-text about-text-default">
+                {highlightText(defaultAboutText)}
               </p>
             )}
-            <h3 className="find-me-title">Find me on</h3>
+            <h3 className="find-me-title">{highlightText("Find me on")}</h3>
             <div className="social-links">
               <a href="#" className="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -131,14 +160,14 @@ const Profile = () => {
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                 </svg>
-                instagram.com/[username]
+                {highlightText("instagram.com/[username]")}
               </a>
               <a href="#" className="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
                   <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
                 </svg>
-                x.com/[username]
+                {highlightText("x.com/[username]")}
               </a>
             </div>
           </div>
