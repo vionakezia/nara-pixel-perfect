@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import fountainPenImage from "@/assets/fountain-pen-ink.png";
+import naraImage from "@/assets/gambarnara.jpeg";
+import fontNara from "@/assets/fontnara.png";
+import logoNara from "@/assets/logonara.png";
 
 interface LandingProps {
   onSignInClick: () => void;
@@ -12,7 +14,7 @@ const Landing = ({ onSignInClick }: LandingProps) => {
       <header className="header">
         <div className="container">
           <div className="header-top">
-            <span className="logo-text">NARA</span>
+            <img src={fontNara} alt="NARA" className="logo-text-img" />
           </div>
           <nav className="header-nav">
             <div className="nav-left">
@@ -20,7 +22,7 @@ const Landing = ({ onSignInClick }: LandingProps) => {
               <Link to="/editor" className="nav-link">Write</Link>
             </div>
             <div className="nav-center">
-              <div className="nav-logo-circle">N</div>
+              <img src={logoNara} alt="NARA Logo" className="nav-logo-img" />
             </div>
             <div className="nav-right">
               <button onClick={onSignInClick} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
@@ -47,7 +49,7 @@ const Landing = ({ onSignInClick }: LandingProps) => {
             </div>
             <div className="hero-right">
               <img 
-                src={fountainPenImage} 
+                src={naraImage} 
                 alt="Fountain pen with ink splash" 
                 className="hero-image"
               />

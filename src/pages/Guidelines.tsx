@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import fountainPenImage from "@/assets/fountain-pen-ink.png";
+import naraImage from "@/assets/gambarnara.jpeg";
+import logoNara from "@/assets/logonara.png";
 
 const Guidelines = () => {
   return (
@@ -7,7 +8,9 @@ const Guidelines = () => {
       {/* Page Header */}
       <header className="page-header">
         <div className="page-header-logo">
-          <Link to="/" className="logo-circle">N</Link>
+          <Link to="/">
+            <img src={logoNara} alt="NARA Logo" className="page-logo-img" />
+          </Link>
         </div>
         <h1 className="page-header-title" style={{ textTransform: 'none', letterSpacing: 'normal' }}>
           Community Guidelines
@@ -46,7 +49,7 @@ const Guidelines = () => {
           </div>
           <div className="guidelines-right">
             <img 
-              src={fountainPenImage} 
+              src={naraImage} 
               alt="Fountain pen with ink splash" 
               className="hero-image"
               style={{ maxWidth: '350px' }}

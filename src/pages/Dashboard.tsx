@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
+import fontNara from "@/assets/fontnara.png";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [todos, setTodos] = useState([
     { id: 1, text: "Write today's journal", checked: false },
     { id: 2, text: "Read 1 new post", checked: false },
@@ -19,17 +22,38 @@ const Dashboard = () => {
     );
   };
 
+  const highlightText = (text: string) => {
+    if (!searchQuery.trim()) return text;
+    const regex = new RegExp(`(${searchQuery})`, 'gi');
+    const parts = text.split(regex);
+    return parts.map((part, i) => 
+      regex.test(part) ? <mark key={i} className="search-highlight">{part}</mark> : part
+    );
+  };
+
   return (
     <div className="dashboard-page">
       <header className="dashboard-header">
         <div className="dashboard-header-left">
-          <h1 className="dashboard-logo">NARA</h1>
-          <div className="search-bar">
+          <img src={fontNara} alt="NARA" className="dashboard-logo-img" onClick={() => navigate("/dashboard")} />
+          <div className="search-bar" onClick={() => setIsSearching(true)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/>
               <path d="m21 21-4.35-4.35"/>
             </svg>
-            <span>Search</span>
+            {isSearching ? (
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onBlur={() => !searchQuery && setIsSearching(false)}
+                autoFocus
+              />
+            ) : (
+              <span>Search</span>
+            )}
           </div>
         </div>
         <nav className="dashboard-nav">
@@ -72,33 +96,33 @@ const Dashboard = () => {
       <main className="dashboard-content">
         <div className="dashboard-main">
           <section className="welcome-section">
-            <h2 className="welcome-title">Hello, [Username]</h2>
-            <p className="welcome-subtitle">Let's continue your journey</p>
+            <h2 className="welcome-title">{highlightText("Hello, [Username]")}</h2>
+            <p className="welcome-subtitle">{highlightText("Let's continue your journey")}</p>
           </section>
 
           <section className="recommended-section">
-            <h3 className="section-title">Recommended for you</h3>
+            <h3 className="section-title">{highlightText("Recommended for you")}</h3>
             
             <article className="article-card">
-              <h4 className="article-title">Taking Care of Your mind</h4>
-              <p className="article-desc">Small steps to improve your mental well-being every day</p>
+              <h4 className="article-title">{highlightText("Taking Care of Your mind")}</h4>
+              <p className="article-desc">{highlightText("Small steps to improve your mental well-being every day")}</p>
             </article>
             
             <article className="article-card">
-              <h4 className="article-title">Journal Prompts for Self-Reflection</h4>
-              <p className="article-desc">Simple prompts to help you understand your thoughts better</p>
+              <h4 className="article-title">{highlightText("Journal Prompts for Self-Reflection")}</h4>
+              <p className="article-desc">{highlightText("Simple prompts to help you understand your thoughts better")}</p>
             </article>
             
             <article className="article-card">
-              <h4 className="article-title">Build a Gentle Lifestyle</h4>
-              <p className="article-desc">Tips for creating a slow, balanced, and mindful life.</p>
+              <h4 className="article-title">{highlightText("Build a Gentle Lifestyle")}</h4>
+              <p className="article-desc">{highlightText("Tips for creating a slow, balanced, and mindful life.")}</p>
             </article>
           </section>
         </div>
 
         <aside className="dashboard-sidebar">
           <div className="todo-widget">
-            <h3 className="widget-title">Your To-Do List</h3>
+            <h3 className="widget-title">{highlightText("Your To-Do List")}</h3>
             <ul className="todo-list">
               {todos.map(todo => (
                 <li key={todo.id} className="todo-item">
@@ -108,11 +132,11 @@ const Dashboard = () => {
                     onChange={() => toggleTodo(todo.id)}
                     className="todo-checkbox"
                   />
-                  <span className={todo.checked ? 'completed' : ''}>{todo.text}</span>
+                  <span className={todo.checked ? 'completed' : ''}>{highlightText(todo.text)}</span>
                 </li>
               ))}
             </ul>
-            <p className="active-recently">Active Recently</p>
+            <p className="active-recently">{highlightText("Active Recently")}</p>
           </div>
         </aside>
       </main>

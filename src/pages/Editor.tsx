@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
+import fontNara from "@/assets/fontnara.png";
 
 const fontSizes = ["10", "12", "14", "16", "18", "20", "24", "28", "32", "36", "48"];
 const colors = ["#000000", "#033C35", "#FF0000", "#0000FF", "#008000", "#FFA500", "#800080", "#7C9690"];
@@ -76,7 +77,12 @@ const Editor = () => {
   return (
     <div className="editor-page">
       <header className="editor-header">
-        <h1 className="editor-logo" onClick={() => navigate("/dashboard")}>NARA</h1>
+        <img 
+          src={fontNara} 
+          alt="NARA" 
+          className="editor-logo-img" 
+          onClick={() => navigate("/dashboard")}
+        />
         <div className="editor-user">
           <span className="username-label">[Username]</span>
           <button className="profile-avatar" onClick={() => setShowDropdown(!showDropdown)}>

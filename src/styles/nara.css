@@ -87,6 +87,64 @@ img {
   text-transform: uppercase;
 }
 
+.logo-text-img {
+  height: 36px;
+  object-fit: contain;
+}
+
+.nav-logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.page-logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.dashboard-logo-img {
+  height: 28px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.editor-logo-img {
+  height: 28px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.profile-logo-img {
+  height: 28px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* Search Input Styles */
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-grey);
+  font-size: 14px;
+  width: 150px;
+}
+
+.search-highlight {
+  background-color: #FFEB3B;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* About Text Default White */
+.about-text-default {
+  color: var(--color-white);
+}
+
 .header-nav {
   display: flex;
   align-items: center;
