@@ -17,7 +17,7 @@ const Landing = ({ onSignInClick }: LandingProps) => {
           <nav className="header-nav">
             <div className="nav-left">
               <Link to="/about" className="nav-link">About us</Link>
-              <a href="#" className="nav-link">Write</a>
+              <Link to="/editor" className="nav-link">Write</Link>
             </div>
             <div className="nav-center">
               <div className="nav-logo-circle">N</div>
