@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import fontNara from "@/assets/fontnara.png";
+import fontNaraHijau from "@/assets/fontnarahijau.png";
 
 interface PublishedContent {
   title: string;
@@ -53,7 +53,7 @@ const Profile = () => {
     <div className="profile-page">
       <header className="profile-header">
         <img 
-          src={fontNara} 
+          src={fontNaraHijau} 
           alt="NARA" 
           className="profile-logo-img" 
           onClick={() => navigate("/dashboard")}

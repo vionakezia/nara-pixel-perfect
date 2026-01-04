@@ -70,12 +70,11 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
 
         <div className="modal-links">
           <a href="#" className="modal-link">Forgot password?</a>
-          <p style={{ color: 'white', fontSize: '14px' }}>
+          <p className="modal-no-account">
             No account?{" "}
             <button 
               onClick={handleCreateAccount}
-              className="modal-link"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+              className="modal-link modal-create-link"
             >
               Create one!
             </button>
