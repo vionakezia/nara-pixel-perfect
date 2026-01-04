@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import fontNara from "@/assets/fontnara.png";
+import logoNara from "@/assets/logonara.png";
 
 interface RegisterProps {
   onSuccess: () => void;
@@ -35,9 +37,11 @@ const Register = ({ onSuccess, onLoginClick }: RegisterProps) => {
       {/* Header */}
       <header className="register-header">
         <div className="register-header-logo">
-          <Link to="/" className="logo-circle">N</Link>
+          <Link to="/">
+            <img src={logoNara} alt="NARA Logo" className="register-logo-img" />
+          </Link>
         </div>
-        <span className="register-logo-text">NARA</span>
+        <img src={fontNara} alt="NARA" className="register-font-img" />
       </header>
 
       {/* Form */}

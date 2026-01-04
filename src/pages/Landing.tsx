@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import naraImage from "@/assets/gambarnara.jpeg";
+import naraImage from "@/assets/gambarnara.png";
 import fontNara from "@/assets/fontnara.png";
 import logoNara from "@/assets/logonara.png";
 

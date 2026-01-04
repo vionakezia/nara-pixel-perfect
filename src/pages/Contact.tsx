@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoNara from "@/assets/logonara.png";
 
 const Contact = () => {
   return (
@@ -6,7 +7,9 @@ const Contact = () => {
       {/* Page Header */}
       <header className="page-header">
         <div className="page-header-logo">
-          <Link to="/" className="logo-circle">N</Link>
+          <Link to="/">
+            <img src={logoNara} alt="NARA Logo" className="page-logo-img" />
+          </Link>
         </div>
         <h1 className="page-header-title" style={{ textTransform: 'none', letterSpacing: 'normal' }}>
           Contact Us

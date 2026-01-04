@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
-import fontNara from "@/assets/fontnara.png";
+import fontNaraHijau from "@/assets/fontnarahijau.png";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Dashboard = () => {
     <div className="dashboard-page">
       <header className="dashboard-header">
         <div className="dashboard-header-left">
-          <img src={fontNara} alt="NARA" className="dashboard-logo-img" onClick={() => navigate("/dashboard")} />
+          <img src={fontNaraHijau} alt="NARA" className="dashboard-logo-img" onClick={() => navigate("/dashboard")} />
           <div className="search-bar" onClick={() => setIsSearching(true)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/>

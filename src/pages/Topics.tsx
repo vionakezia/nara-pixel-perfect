@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import fontNara from "@/assets/fontnara.png";
+import logoNara from "@/assets/logonara.png";
 
 const TOPICS = [
   "Self Improvement", "Pyschology", "Money", "Mental Health", "Artificial Intelligence",
@@ -27,8 +29,8 @@ const Topics = () => {
   return (
     <div className="topics-page">
       <header className="topics-header">
-        <div className="logo-circle">N</div>
-        <h1 className="topics-logo-text">NARA</h1>
+        <img src={logoNara} alt="NARA Logo" className="topics-logo-img" />
+        <img src={fontNara} alt="NARA" className="topics-font-img" />
       </header>
       
       <main className="topics-content">

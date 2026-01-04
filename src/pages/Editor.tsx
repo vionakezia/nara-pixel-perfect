@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
-import fontNara from "@/assets/fontnara.png";
+import fontNaraHijau from "@/assets/fontnarahijau.png";
 
 const fontSizes = ["10", "12", "14", "16", "18", "20", "24", "28", "32", "36", "48"];
 const colors = ["#000000", "#033C35", "#FF0000", "#0000FF", "#008000", "#FFA500", "#800080", "#7C9690"];
@@ -78,7 +78,7 @@ const Editor = () => {
     <div className="editor-page">
       <header className="editor-header">
         <img 
-          src={fontNara} 
+          src={fontNaraHijau} 
           alt="NARA" 
           className="editor-logo-img" 
           onClick={() => navigate("/dashboard")}
