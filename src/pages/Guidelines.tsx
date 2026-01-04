@@ -22,8 +22,8 @@ const Guidelines = () => {
         <div className="guidelines-content">
           <div className="guidelines-left">
             <div className="guideline-section">
-              <h2 className="guideline-title">1. Saling Menghormati</h2>
-              <ul className="guideline-list">
+              <h2 className="guideline-title-large">1. Saling Menghormati</h2>
+              <ul className="guideline-list-large">
                 <li>Gunakan bahasa yang sopan dan tidak merendahkan.</li>
                 <li>Hormati perbedaan pendapat, gaya menulis, dan latar belakang pengguna lain.</li>
                 <li>Dilarang melakukan perundungan (bullying), ujaran kebencian, pelecehan, atau intimidasi dalam bentuk apa pun.</li>
@@ -31,8 +31,8 @@ const Guidelines = () => {
             </div>
 
             <div className="guideline-section">
-              <h2 className="guideline-title">2. Ekspresi yang Aman dan Bertanggung Jawab</h2>
-              <ul className="guideline-list">
+              <h2 className="guideline-title-large">2. Ekspresi yang Aman dan Bertanggung Jawab</h2>
+              <ul className="guideline-list-large">
                 <li>Tulisan harus merupakan karya asli atau diberi kredit jika mengutip.</li>
                 <li>Dilarang menyebarkan konten berbahaya, kekerasan, atau eksploitasi.</li>
                 <li>Hindari konten yang bersifat sensitif tanpa peringatan yang jelas.</li>
@@ -40,8 +40,8 @@ const Guidelines = () => {
             </div>
 
             <div className="guideline-section">
-              <h2 className="guideline-title">3. Privasi dan Keamanan</h2>
-              <ul className="guideline-list">
+              <h2 className="guideline-title-large">3. Privasi dan Keamanan</h2>
+              <ul className="guideline-list-large">
                 <li>Jangan membagikan informasi pribadi orang lain tanpa izin.</li>
                 <li>Lindungi akun Anda dan jangan bagikan kata sandi.</li>
               </ul>

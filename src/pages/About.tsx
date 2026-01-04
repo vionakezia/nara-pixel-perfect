@@ -19,8 +19,8 @@ const About = () => {
       <main className="container">
         <div className="about-content">
           <div className="about-left">
-            <h2 className="about-title">Where<br />ideas live</h2>
-            <div className="about-text">
+            <h2 className="about-title-large">Where<br />ideas live</h2>
+            <div className="about-text-large">
               <p>
                 Nara is a calm space built for those who find meaning in words. Here, 
                 writing isn't just about expression — it's about reflection, connection, 

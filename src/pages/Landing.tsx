@@ -16,13 +16,15 @@ const Landing = ({ onSignInClick }: LandingProps) => {
           <div className="header-top">
             <img src={fontNara} alt="NARA" className="logo-text-img" />
           </div>
+          <div className="header-logo-centered">
+            <img src={logoNara} alt="NARA Logo" className="nav-logo-img-centered" />
+          </div>
           <nav className="header-nav">
             <div className="nav-left">
               <Link to="/about" className="nav-link">About us</Link>
               <Link to="/editor" className="nav-link">Write</Link>
             </div>
             <div className="nav-center">
-              <img src={logoNara} alt="NARA Logo" className="nav-logo-img" />
             </div>
             <div className="nav-right">
               <button onClick={onSignInClick} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
