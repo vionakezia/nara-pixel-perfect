@@ -2102,3 +2102,266 @@ img {
   color: var(--color-primary);
   margin-bottom: 8px;
 }
+
+/* ===== Landing Page Logo Centered ===== */
+.header-logo-centered {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.nav-logo-img-centered {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* ===== About & Guidelines Larger Fonts ===== */
+.about-title-large {
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin-bottom: 32px;
+}
+
+.about-text-large {
+  font-size: 26px;
+  color: var(--color-primary);
+  line-height: 1.7;
+}
+
+.about-text-large p {
+  margin-bottom: 28px;
+}
+
+.guideline-title-large {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.guideline-list-large {
+  padding-left: 28px;
+}
+
+.guideline-list-large li {
+  font-size: 24px;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+  list-style: disc;
+  line-height: 1.6;
+}
+
+/* ===== Tablet Styles (768px - 1024px) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Header */
+  .header-nav {
+    padding: 12px 0;
+  }
+  
+  .nav-left,
+  .nav-right {
+    gap: 24px;
+  }
+  
+  .nav-link {
+    font-size: 16px;
+  }
+  
+  .logo-text-img {
+    height: 28px;
+  }
+  
+  .nav-logo-img-centered {
+    width: 45px;
+    height: 45px;
+  }
+  
+  /* Hero Section */
+  .hero-content {
+    gap: 30px;
+  }
+  
+  .hero-title {
+    font-size: 56px;
+  }
+  
+  .hero-box {
+    padding: 36px 32px;
+  }
+  
+  .hero-image {
+    width: 350px;
+  }
+  
+  .hero-tagline-text {
+    font-size: 20px;
+  }
+  
+  /* About Page */
+  .about-content {
+    gap: 40px;
+    padding: 40px 0;
+  }
+  
+  .about-right {
+    flex: 0 0 280px;
+  }
+  
+  .about-title-large {
+    font-size: 56px;
+  }
+  
+  .about-text-large {
+    font-size: 22px;
+  }
+  
+  /* Guidelines Page */
+  .guidelines-content {
+    gap: 40px;
+    padding: 40px 0;
+  }
+  
+  .guidelines-right {
+    flex: 0 0 280px;
+  }
+  
+  .guideline-title-large {
+    font-size: 24px;
+  }
+  
+  .guideline-list-large li {
+    font-size: 20px;
+  }
+  
+  /* Dashboard */
+  .dashboard-header {
+    padding: 16px 24px;
+  }
+  
+  .dashboard-logo-img {
+    height: 24px;
+  }
+  
+  .nav-items {
+    gap: 20px;
+  }
+  
+  .nav-item {
+    font-size: 14px;
+  }
+  
+  .dashboard-content {
+    padding: 24px;
+  }
+  
+  .welcome-title {
+    font-size: 32px;
+  }
+  
+  .dashboard-sidebar {
+    width: 280px;
+  }
+  
+  /* Profile Page */
+  .profile-header {
+    padding: 16px 24px;
+    gap: 16px;
+  }
+  
+  .profile-logo-img {
+    height: 24px;
+  }
+  
+  .profile-nav-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .profile-hero {
+    padding: 32px 24px;
+  }
+  
+  .profile-avatar-lg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-username {
+    font-size: 28px;
+  }
+  
+  .profile-content {
+    padding: 24px;
+  }
+  
+  .profile-sidebar {
+    width: 280px;
+  }
+  
+  /* Editor Page */
+  .editor-header {
+    padding: 16px 24px;
+  }
+  
+  .editor-logo-img {
+    height: 24px;
+  }
+  
+  .editor-content {
+    padding: 24px;
+  }
+  
+  .toolbar-options {
+    gap: 12px;
+  }
+  
+  .toolbar-option {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  
+  /* ToDo Page */
+  .todo-page-content {
+    padding: 32px 24px;
+  }
+  
+  .todo-page-title {
+    font-size: 32px;
+  }
+  
+  /* Topics Page */
+  .topics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .topic-item {
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+  
+  /* Register Page */
+  .register-card {
+    padding: 36px 40px;
+    max-width: 420px;
+  }
+  
+  /* Modal */
+  .modal {
+    padding: 40px 48px;
+    max-width: 420px;
+  }
+  
+  /* Footer */
+  .footer-nav {
+    gap: 60px;
+  }
+  
+  .footer-link {
+    font-size: 14px;
+  }
+}
