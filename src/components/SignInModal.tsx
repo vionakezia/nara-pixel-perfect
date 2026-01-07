@@ -18,6 +18,7 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
     // Handle sign in logic here
     console.log("Sign in:", formData);
     onClose();
+    navigate("/topics");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +41,7 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
         
-        <h2 className="modal-title">Create an account to start writing</h2>
+        <h2 className="modal-title">Your words are waiting</h2>
         
         <form onSubmit={handleSubmit}>
           <input
