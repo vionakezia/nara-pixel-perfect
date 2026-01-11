@@ -31,13 +31,8 @@ const ForgotPasswordModal = ({ isOpen, onClose, onBackToLogin }: ForgotPasswordM
   };
 
   const handleBackToLoginFromCheckEmail = () => {
-    onClose();
-    // After 3 seconds, show reset password popup
-    setTimeout(() => {
-      setStep("reset");
-      // Re-open the modal with reset step
-      onBackToLogin();
-    }, 3000);
+    // Go directly to reset password step
+    setStep("reset");
   };
 
   const handleResetPassword = (e: React.FormEvent) => {
@@ -65,14 +60,14 @@ const ForgotPasswordModal = ({ isOpen, onClose, onBackToLogin }: ForgotPasswordM
             <p className="modal-subtitle">Enter your email and we will send you a link to reset your password</p>
             
             <form onSubmit={handleForgotSubmit}>
-              <div className="modal-input-with-icon">
+              <div className="modal-input-with-icon modal-input-compact">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
                 <input
                   type="email"
-                  className="modal-input"
+                  className="modal-input modal-input-small"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -94,8 +89,8 @@ const ForgotPasswordModal = ({ isOpen, onClose, onBackToLogin }: ForgotPasswordM
 
         {step === "check-email" && (
           <>
-            <div className="modal-icon-container">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="modal-icon-container modal-icon-center">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="2" y="4" width="20" height="16" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
