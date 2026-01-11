@@ -2365,3 +2365,240 @@ img {
     font-size: 14px;
   }
 }
+
+/* ===== Get Started Button ===== */
+.btn-get-started {
+  background-color: #F0E6BE;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.btn-get-started:hover {
+  background-color: #e8ddb0;
+}
+
+/* ===== Article Page ===== */
+.article-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+}
+
+.article-content {
+  flex: 1;
+  padding: 60px 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.article-page-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.article-body {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.article-subtitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+}
+
+.article-body p {
+  font-size: 18px;
+  color: var(--color-primary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* ===== Publish Dropdown ===== */
+.publish-dropdown-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 32px auto;
+}
+
+.publish-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 48px;
+}
+
+.publish-chevron {
+  margin-left: 4px;
+}
+
+.publish-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  z-index: 100;
+  margin-top: 8px;
+  padding: 8px 0;
+}
+
+.publish-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+.publish-dropdown-item:hover {
+  background-color: var(--color-cream);
+}
+
+.publish-dropdown-text {
+  text-decoration: underline;
+}
+
+/* ===== Profile Dropdown Sign Out ===== */
+.dropdown-signout-container {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.dropdown-signout-btn {
+  padding: 10px 24px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-grey);
+  border-radius: 50px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdown-signout-btn:hover {
+  background-color: var(--color-cream);
+}
+
+/* ===== My Posts Section ===== */
+.my-posts-section {
+  padding: 24px;
+}
+
+.my-posts-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.post-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid #F0E6BE;
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.post-card-content {
+  flex: 1;
+}
+
+.post-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.post-card-text {
+  font-size: 14px;
+  color: var(--color-primary);
+  line-height: 1.5;
+}
+
+.post-status {
+  font-size: 12px;
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-grey);
+}
+
+/* ===== Forgot Password Modal ===== */
+.modal-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.modal-input-with-icon {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.modal-input-with-icon svg {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-input-with-icon .modal-input {
+  padding-left: 50px;
+}
+
+.modal-back-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-icon-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-icon-container svg {
+  color: var(--color-white);
+}
+
+.modal-link-inline {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.modal-title-accent {
+  color: #9BC5A2;
+}

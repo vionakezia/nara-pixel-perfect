@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileDropdownProps {
   isOpen: boolean;
@@ -7,6 +8,7 @@ interface ProfileDropdownProps {
 }
 
 const ProfileDropdown = ({ isOpen, onClose, onProfileClick }: ProfileDropdownProps) => {
+  const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,6 +27,21 @@ const ProfileDropdown = ({ isOpen, onClose, onProfileClick }: ProfileDropdownPro
     };
   }, [isOpen, onClose]);
 
+  const handleWriterClick = () => {
+    onClose();
+    navigate("/editor");
+  };
+
+  const handleProfileClick = () => {
+    onClose();
+    onProfileClick();
+  };
+
+  const handleSignOut = () => {
+    onClose();
+    navigate("/");
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -39,10 +56,11 @@ const ProfileDropdown = ({ isOpen, onClose, onProfileClick }: ProfileDropdownPro
         </div>
         <p className="dropdown-username">[username]</p>
         <p className="dropdown-email">username@gmail.com</p>
-        <p className="dropdown-role">Writer</p>
-        <div className="dropdown-divider"></div>
-        <button className="dropdown-item" onClick={onProfileClick}>Profile</button>
-        <button className="dropdown-item">Settings</button>
+        <button className="dropdown-item" onClick={handleWriterClick}>Writer</button>
+        <button className="dropdown-item" onClick={handleProfileClick}>Profile</button>
+        <div className="dropdown-signout-container">
+          <button className="dropdown-signout-btn" onClick={handleSignOut}>Sign Out</button>
+        </div>
       </div>
     </div>
   );

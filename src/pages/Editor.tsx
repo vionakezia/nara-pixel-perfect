@@ -25,6 +25,7 @@ const Editor = () => {
   const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false);
   const [showColorDropdown, setShowColorDropdown] = useState(false);
   const [showFontDropdown, setShowFontDropdown] = useState(false);
+  const [showPublishDropdown, setShowPublishDropdown] = useState(false);
   
   // Image upload
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -41,7 +42,12 @@ const Editor = () => {
     }
   };
 
-  const handlePublish = () => {
+  const handlePublish = (status: "published" | "draft" | "archive") => {
+    if (!title.trim() && !content.trim()) {
+      setShowPublishDropdown(false);
+      return;
+    }
+    
     // Store the content in localStorage so Profile can access it
     const publishedContent = {
       title,
@@ -53,9 +59,11 @@ const Editor = () => {
       isItalic,
       isUnderline,
       fontFamily,
+      status,
       publishedAt: new Date().toISOString()
     };
     localStorage.setItem('nara_published_content', JSON.stringify(publishedContent));
+    setShowPublishDropdown(false);
     navigate("/profile");
   };
 
@@ -260,7 +268,30 @@ const Editor = () => {
           />
         </div>
 
-        <button className="btn btn-primary publish-btn" onClick={handlePublish}>Publish</button>
+        <div className="publish-dropdown-container">
+          <button 
+            className="btn btn-primary publish-btn" 
+            onClick={() => setShowPublishDropdown(!showPublishDropdown)}
+          >
+            Publish
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="publish-chevron">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          {showPublishDropdown && (
+            <div className="publish-dropdown">
+              <button className="publish-dropdown-item" onClick={() => handlePublish("published")}>
+                <span className="publish-dropdown-text">Publish</span>
+              </button>
+              <button className="publish-dropdown-item" onClick={() => handlePublish("draft")}>
+                <span className="publish-dropdown-text">Draft</span>
+              </button>
+              <button className="publish-dropdown-item" onClick={() => handlePublish("archive")}>
+                <span className="publish-dropdown-text">Archive</span>
+              </button>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

@@ -12,6 +12,7 @@ interface PublishedContent {
   isItalic: boolean;
   isUnderline: boolean;
   fontFamily: string;
+  status: "published" | "draft" | "archive";
   publishedAt: string;
 }
 
@@ -48,6 +49,21 @@ const Profile = () => {
   };
 
   const defaultAboutText = "Hello! I love writing about anything and everything. But with NARA, I will be sharing stories about the things that drive me in life.";
+
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "published": return "published";
+      case "draft": return "draft";
+      case "archive": return "archived";
+      default: return "published";
+    }
+  };
+
+  const filteredContent = publishedContent && (
+    (activeTab === "publish" && publishedContent.status === "published") ||
+    (activeTab === "draft" && publishedContent.status === "draft") ||
+    (activeTab === "archive" && publishedContent.status === "archive")
+  ) ? publishedContent : null;
 
   return (
     <div className="profile-page">
@@ -106,16 +122,16 @@ const Profile = () => {
           Publish
         </button>
         <button 
-          className={`profile-tab ${activeTab === 'todo' ? 'active' : ''}`}
-          onClick={() => setActiveTab('todo')}
-        >
-          To-Do
-        </button>
-        <button 
           className={`profile-tab ${activeTab === 'draft' ? 'active' : ''}`}
           onClick={() => setActiveTab('draft')}
         >
           Draft
+        </button>
+        <button 
+          className={`profile-tab ${activeTab === 'archive' ? 'active' : ''}`}
+          onClick={() => setActiveTab('archive')}
+        >
+          Archive
         </button>
       </nav>
 
@@ -123,35 +139,9 @@ const Profile = () => {
         <aside className="profile-sidebar">
           <div className="about-card">
             <h3 className="about-card-title">{highlightText("About")}</h3>
-            {publishedContent ? (
-              <div className="published-content">
-                {publishedContent.image && (
-                  <img 
-                    src={publishedContent.image} 
-                    alt="Published" 
-                    className="published-image"
-                  />
-                )}
-                {publishedContent.title && (
-                  <h4 
-                    className="published-title"
-                    style={getTextStyle(publishedContent)}
-                  >
-                    {highlightText(publishedContent.title)}
-                  </h4>
-                )}
-                <p 
-                  className="about-text"
-                  style={getTextStyle(publishedContent)}
-                >
-                  {highlightText(publishedContent.content || defaultAboutText)}
-                </p>
-              </div>
-            ) : (
-              <p className="about-text about-text-default">
-                {highlightText(defaultAboutText)}
-              </p>
-            )}
+            <p className="about-text about-text-default">
+              {highlightText(defaultAboutText)}
+            </p>
             <h3 className="find-me-title">{highlightText("Find me on")}</h3>
             <div className="social-links">
               <a href="#" className="social-link">
@@ -173,8 +163,25 @@ const Profile = () => {
           </div>
         </aside>
         <section className="profile-main">
-          <div className="profile-main-content">
-            {/* Content area with dividers */}
+          <div className="my-posts-section">
+            <h3 className="my-posts-title">My Posts</h3>
+            {filteredContent ? (
+              <div className="post-card">
+                <div className="post-card-content">
+                  <h4 className="post-card-title" style={getTextStyle(filteredContent)}>
+                    {highlightText(filteredContent.title || "Untitled")}
+                  </h4>
+                  <p className="post-card-text" style={getTextStyle(filteredContent)}>
+                    {highlightText(filteredContent.content || "")}
+                  </p>
+                </div>
+                <span className="post-status">{getStatusLabel(filteredContent.status)}</span>
+              </div>
+            ) : (
+              <div className="no-posts">
+                <p>No {activeTab === "publish" ? "published" : activeTab === "draft" ? "draft" : "archived"} posts yet.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>

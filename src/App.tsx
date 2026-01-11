@@ -8,8 +8,10 @@ import Register from "./pages/Register";
 import Topics from "./pages/Topics";
 import Dashboard from "./pages/Dashboard";
 import Editor from "./pages/Editor";
-import ToDo from "./pages/ToDo";
 import Profile from "./pages/Profile";
+import TakingCareOfYourMind from "./pages/TakingCareOfYourMind";
+import JournalPrompts from "./pages/JournalPrompts";
+import BuildGentleLifestyle from "./pages/BuildGentleLifestyle";
 import SignInModal from "./components/SignInModal";
 import SuccessModal from "./components/SuccessModal";
 import NotFound from "./pages/NotFound";
@@ -60,8 +62,10 @@ const AppContent = () => {
         <Route path="/topics" element={<Topics />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/editor" element={<Editor />} />
-        <Route path="/todo" element={<ToDo />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/taking-care-of-your-mind" element={<TakingCareOfYourMind />} />
+        <Route path="/journal-prompts" element={<JournalPrompts />} />
+        <Route path="/build-gentle-lifestyle" element={<BuildGentleLifestyle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       

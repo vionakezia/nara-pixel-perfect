@@ -28,7 +28,7 @@ const Landing = ({ onSignInClick }: LandingProps) => {
               <button onClick={onSignInClick} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                 Sign in
               </button>
-              <Link to="/register" className="btn btn-primary">Get Started</Link>
+              <Link to="/register" className="btn btn-get-started">Get Started</Link>
             </div>
           </nav>
         </div>
