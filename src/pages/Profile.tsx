@@ -6,11 +6,16 @@ interface PublishedContent {
   title: string;
   content: string;
   image: string | null;
-  fontSize: string;
-  textColor: string;
-  isBold: boolean;
-  isItalic: boolean;
-  isUnderline: boolean;
+  titleFontSize: string;
+  titleTextColor: string;
+  titleIsBold: boolean;
+  titleIsItalic: boolean;
+  titleIsUnderline: boolean;
+  contentFontSize: string;
+  contentTextColor: string;
+  contentIsBold: boolean;
+  contentIsItalic: boolean;
+  contentIsUnderline: boolean;
   fontFamily: string;
   status: "published" | "draft" | "archive";
   publishedAt: string;
@@ -30,12 +35,21 @@ const Profile = () => {
     }
   }, []);
 
-  const getTextStyle = (content: PublishedContent) => ({
-    fontSize: `${content.fontSize}px`,
-    color: content.textColor,
-    fontWeight: content.isBold ? 'bold' : 'normal',
-    fontStyle: content.isItalic ? 'italic' : 'normal',
-    textDecoration: content.isUnderline ? 'underline' : 'none',
+  const getTitleStyle = (content: PublishedContent) => ({
+    fontSize: `${content.titleFontSize}px`,
+    color: content.titleTextColor,
+    fontWeight: content.titleIsBold ? 'bold' : 'normal',
+    fontStyle: content.titleIsItalic ? 'italic' : 'normal',
+    textDecoration: content.titleIsUnderline ? 'underline' : 'none',
+    fontFamily: content.fontFamily,
+  });
+
+  const getContentStyle = (content: PublishedContent) => ({
+    fontSize: `${content.contentFontSize}px`,
+    color: content.contentTextColor,
+    fontWeight: content.contentIsBold ? 'bold' : 'normal',
+    fontStyle: content.contentIsItalic ? 'italic' : 'normal',
+    textDecoration: content.contentIsUnderline ? 'underline' : 'none',
     fontFamily: content.fontFamily,
   });
 
@@ -139,7 +153,7 @@ const Profile = () => {
         <aside className="profile-sidebar">
           <div className="about-card">
             <h3 className="about-card-title">{highlightText("About")}</h3>
-            <p className="about-text about-text-default">
+            <p className="about-text" style={{ color: '#FFFFFF' }}>
               {highlightText(defaultAboutText)}
             </p>
             <h3 className="find-me-title">{highlightText("Find me on")}</h3>
@@ -166,16 +180,16 @@ const Profile = () => {
           <div className="my-posts-section">
             <h3 className="my-posts-title">My Posts</h3>
             {filteredContent ? (
-              <div className="post-card">
-                <div className="post-card-content">
-                  <h4 className="post-card-title" style={getTextStyle(filteredContent)}>
+              <div className="post-card-new">
+                <div className="post-card-new-header">
+                  <h4 className="post-card-new-title" style={getTitleStyle(filteredContent)}>
                     {highlightText(filteredContent.title || "Untitled")}
                   </h4>
-                  <p className="post-card-text" style={getTextStyle(filteredContent)}>
-                    {highlightText(filteredContent.content || "")}
-                  </p>
+                  <span className="post-card-new-status">{getStatusLabel(filteredContent.status)}</span>
                 </div>
-                <span className="post-status">{getStatusLabel(filteredContent.status)}</span>
+                <p className="post-card-new-text" style={getContentStyle(filteredContent)}>
+                  {highlightText(filteredContent.content || "")}
+                </p>
               </div>
             ) : (
               <div className="no-posts">

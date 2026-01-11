@@ -2602,3 +2602,94 @@ img {
 .modal-title-accent {
   color: #9BC5A2;
 }
+
+/* ===== New My Posts Card Layout ===== */
+.post-card-new {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+}
+
+.post-card-new-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.post-card-new-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.post-card-new-status {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-style: italic;
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+.post-card-new-text {
+  font-size: 15px;
+  color: var(--color-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== Modal Input Compact ===== */
+.modal-input-compact {
+  margin-bottom: 16px;
+}
+
+.modal-input-small {
+  padding: 12px 24px 12px 50px !important;
+}
+
+/* ===== Modal Icon Center ===== */
+.modal-icon-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-icon-center svg {
+  width: 64px;
+  height: 64px;
+}
+
+/* ===== Editor Field Selector ===== */
+.toolbar-field-selector {
+  display: flex;
+  gap: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 4px;
+  margin-right: 12px;
+}
+
+.field-btn {
+  padding: 6px 16px;
+  border: none;
+  background: none;
+  color: var(--color-grey);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+
+.field-btn:hover {
+  color: var(--color-primary);
+}
+
+.field-btn.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
