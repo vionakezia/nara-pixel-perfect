@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 interface SignInModalProps {
   isOpen: boolean;
@@ -12,6 +13,8 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
     username: "",
     password: ""
   });
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showResetFromEmail, setShowResetFromEmail] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +37,36 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
     navigate("/register");
   };
 
-  if (!isOpen) return null;
+  const handleForgotPasswordClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowForgotPassword(true);
+  };
+
+  const handleCloseForgotPassword = () => {
+    setShowForgotPassword(false);
+    setShowResetFromEmail(false);
+  };
+
+  const handleBackToLogin = () => {
+    setShowForgotPassword(false);
+  };
+
+  const handleShowResetModal = () => {
+    setShowResetFromEmail(true);
+    setShowForgotPassword(true);
+  };
+
+  if (!isOpen && !showForgotPassword) return null;
+
+  if (showForgotPassword) {
+    return (
+      <ForgotPasswordModal
+        isOpen={showForgotPassword}
+        onClose={handleCloseForgotPassword}
+        onBackToLogin={handleBackToLogin}
+      />
+    );
+  }
 
   return (
     <div className={`modal-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
@@ -70,7 +102,9 @@ const SignInModal = ({ isOpen, onClose }: SignInModalProps) => {
         </form>
 
         <div className="modal-links">
-          <a href="#" className="modal-link">Forgot password?</a>
+          <button onClick={handleForgotPasswordClick} className="modal-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+            Forgot password?
+          </button>
           <p className="modal-no-account">
             No account?{" "}
             <button 

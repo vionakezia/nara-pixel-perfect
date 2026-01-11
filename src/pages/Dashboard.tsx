@@ -8,19 +8,6 @@ const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Write today's journal", checked: false },
-    { id: 2, text: "Read 1 new post", checked: false },
-    { id: 3, text: "Upload a photo", checked: false },
-  ]);
-
-  const toggleTodo = (id: number) => {
-    setTodos(prev => 
-      prev.map(todo => 
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
-  };
 
   const highlightText = (text: string) => {
     if (!searchQuery.trim()) return text;
@@ -57,7 +44,7 @@ const Dashboard = () => {
           </div>
         </div>
         <nav className="dashboard-nav">
-          <button className="nav-item" onClick={() => navigate("/")}>
+          <button className="nav-item" onClick={() => navigate("/dashboard")}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
               <polyline points="9 22 9 12 15 12 15 22"/>
@@ -70,13 +57,6 @@ const Dashboard = () => {
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
             Write
-          </button>
-          <button className="nav-item" onClick={() => navigate("/todo")}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <path d="M9 12l2 2 4-4"/>
-            </svg>
-            To-Do
           </button>
           <button className="nav-item" onClick={() => setShowDropdown(!showDropdown)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -103,42 +83,22 @@ const Dashboard = () => {
           <section className="recommended-section">
             <h3 className="section-title">{highlightText("Recommended for you")}</h3>
             
-            <article className="article-card">
+            <article className="article-card" onClick={() => navigate("/taking-care-of-your-mind")}>
               <h4 className="article-title">{highlightText("Taking Care of Your mind")}</h4>
               <p className="article-desc">{highlightText("Small steps to improve your mental well-being every day")}</p>
             </article>
             
-            <article className="article-card">
+            <article className="article-card" onClick={() => navigate("/journal-prompts")}>
               <h4 className="article-title">{highlightText("Journal Prompts for Self-Reflection")}</h4>
               <p className="article-desc">{highlightText("Simple prompts to help you understand your thoughts better")}</p>
             </article>
             
-            <article className="article-card">
+            <article className="article-card" onClick={() => navigate("/build-gentle-lifestyle")}>
               <h4 className="article-title">{highlightText("Build a Gentle Lifestyle")}</h4>
               <p className="article-desc">{highlightText("Tips for creating a slow, balanced, and mindful life.")}</p>
             </article>
           </section>
         </div>
-
-        <aside className="dashboard-sidebar">
-          <div className="todo-widget">
-            <h3 className="widget-title">{highlightText("Your To-Do List")}</h3>
-            <ul className="todo-list">
-              {todos.map(todo => (
-                <li key={todo.id} className="todo-item">
-                  <input 
-                    type="checkbox" 
-                    checked={todo.checked}
-                    onChange={() => toggleTodo(todo.id)}
-                    className="todo-checkbox"
-                  />
-                  <span className={todo.checked ? 'completed' : ''}>{highlightText(todo.text)}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="active-recently">{highlightText("Active Recently")}</p>
-          </div>
-        </aside>
       </main>
     </div>
   );
