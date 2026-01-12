@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
-import fontNara from "@/assets/fontnara.png";
+import fontNaraHijau from "@/assets/fontnarahijau.png";
 
 const fontSizes = ["10", "12", "14", "16", "18", "20", "24", "28", "32", "36", "48"];
 const colors = ["#000000", "#FFFFFF", "#033C35", "#FF0000", "#0000FF", "#008000", "#FFA500", "#800080", "#7C9690"];
@@ -110,22 +110,42 @@ const Editor = () => {
 
   return (
     <div className="editor-page">
-      <header className="editor-header">
-        <img 
-          src={fontNara} 
-          alt="NARA" 
-          className="editor-logo-img" 
-          onClick={() => navigate("/dashboard")}
-        />
-        <div className="editor-user">
-          <span className="username-label">[Username]</span>
-          <button className="profile-avatar" onClick={() => setShowDropdown(!showDropdown)}>
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" 
-              alt="Profile" 
-            />
-          </button>
+      <header className="dashboard-header-lined">
+        <div className="dashboard-header-left">
+          <img 
+            src={fontNaraHijau} 
+            alt="NARA" 
+            className="dashboard-logo-img" 
+            onClick={() => navigate("/dashboard")}
+          />
         </div>
+        <nav className="dashboard-nav-lined">
+          <button className="nav-item-lined" onClick={() => navigate("/dashboard")}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+          </button>
+          <span className="nav-separator">|</span>
+          <button className="nav-item-lined">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+            Write
+          </button>
+          <span className="nav-separator">|</span>
+          <button className="nav-item-lined" onClick={() => setShowDropdown(!showDropdown)}>
+            <div className="profile-icon-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            Profile
+          </button>
+        </nav>
         <ProfileDropdown 
           isOpen={showDropdown} 
           onClose={() => setShowDropdown(false)}
@@ -286,23 +306,31 @@ const Editor = () => {
 
         <div className="publish-dropdown-container">
           <button 
-            className="publish-btn-new" 
+            className="publish-btn-rounded" 
             onClick={() => setShowPublishDropdown(!showPublishDropdown)}
           >
             Publish
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="publish-chevron">
+            <svg 
+              width="14" 
+              height="14" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              className={`publish-chevron ${showPublishDropdown ? 'chevron-up' : 'chevron-down'}`}
+            >
               <path d="m6 9 6 6 6-6"/>
             </svg>
           </button>
           {showPublishDropdown && (
-            <div className="publish-dropdown-new">
-              <button className="publish-dropdown-item-new" onClick={() => handlePublish("published")}>
+            <div className="publish-dropdown-green">
+              <button className="publish-dropdown-item-white" onClick={() => handlePublish("published")}>
                 Publish
               </button>
-              <button className="publish-dropdown-item-new" onClick={() => handlePublish("draft")}>
+              <button className="publish-dropdown-item-white" onClick={() => handlePublish("draft")}>
                 Draft
               </button>
-              <button className="publish-dropdown-item-new" onClick={() => handlePublish("archive")}>
+              <button className="publish-dropdown-item-white" onClick={() => handlePublish("archive")}>
                 Archive
               </button>
             </div>
