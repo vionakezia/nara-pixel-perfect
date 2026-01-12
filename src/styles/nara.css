@@ -2804,3 +2804,176 @@ img {
 .publish-dropdown-item-new:hover {
   color: #024a41;
 }
+
+/* ===== New Header Nav Layout (Landing) ===== */
+.header-top-new {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.header-nav-new {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-grey);
+}
+
+.nav-logo-circle-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* ===== Dashboard Header with Lines ===== */
+.dashboard-header-lined {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background-color: var(--color-primary);
+  position: relative;
+}
+
+.dashboard-nav-lined {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-item-lined {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nav-item-lined:hover {
+  opacity: 0.8;
+}
+
+.nav-separator {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+}
+
+.profile-icon-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-icon-box svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== New Publish Button Rounded ===== */
+.publish-btn-rounded {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.publish-btn-rounded:hover {
+  background-color: #024a41;
+}
+
+.publish-btn-rounded .publish-chevron {
+  transition: transform 0.2s;
+}
+
+.publish-btn-rounded .publish-chevron.chevron-up {
+  transform: rotate(180deg);
+}
+
+.publish-btn-rounded .publish-chevron.chevron-down {
+  transform: rotate(0deg);
+}
+
+/* ===== Green Publish Dropdown ===== */
+.publish-dropdown-green {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary);
+  border-radius: 12px;
+  min-width: 120px;
+  z-index: 100;
+  margin-top: 8px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.publish-dropdown-item-white {
+  display: block;
+  width: 100%;
+  padding: 6px 0;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.publish-dropdown-item-white:hover {
+  opacity: 0.8;
+}
+
+/* ===== Forgot Password Input Icon Aligned ===== */
+.modal-input-with-icon-new {
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  background-color: transparent;
+  padding: 0 20px;
+}
+
+.modal-input-with-icon-new svg {
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.modal-input-small-new {
+  width: 100%;
+  padding: 12px 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  color: var(--color-white);
+  font-size: 16px;
+  margin: 0 !important;
+}
+
+.modal-input-small-new:focus {
+  outline: none;
+}
