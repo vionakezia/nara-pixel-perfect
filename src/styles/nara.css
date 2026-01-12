@@ -2103,7 +2103,7 @@ img {
   margin-bottom: 8px;
 }
 
-/* ===== Landing Page Logo Centered ===== */
+/* ===== Landing Page Header Logo Centered ===== */
 .header-logo-centered {
   display: flex;
   justify-content: center;
@@ -2115,6 +2115,13 @@ img {
   height: 50px;
   border-radius: 50%;
   object-fit: contain;
+}
+
+/* Remove nav-center from header-nav when using centered logo */
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* ===== About & Guidelines Larger Fonts ===== */
@@ -2603,6 +2610,16 @@ img {
   color: #9BC5A2;
 }
 
+.modal-title-white {
+  color: #FFFFFF;
+}
+
+/* ===== Modal Input Icon Centered (vertically) ===== */
+.modal-input-icon-centered svg {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* ===== New My Posts Card Layout ===== */
 .post-card-new {
   background-color: var(--color-white);
@@ -2692,4 +2709,98 @@ img {
 .field-btn.active {
   background-color: var(--color-primary);
   color: var(--color-white);
+}
+
+/* ===== Rich Text Editor Editable Areas ===== */
+.editor-title-editable {
+  width: 100%;
+  min-height: 50px;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--color-primary);
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.editor-title-editable:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(124, 150, 144, 0.5);
+  font-style: italic;
+}
+
+.editor-content-editable {
+  width: 100%;
+  min-height: 300px;
+  font-size: 14px;
+  color: var(--color-primary);
+  border: none;
+  outline: none;
+  background: transparent;
+  line-height: 1.6;
+}
+
+.editor-content-editable:empty:before {
+  content: attr(data-placeholder);
+  color: var(--color-grey);
+}
+
+/* ===== New Publish Button Design ===== */
+.publish-btn-new {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.publish-btn-new:hover {
+  background-color: #024a41;
+}
+
+.publish-btn-new .publish-chevron {
+  margin-left: 4px;
+}
+
+.publish-dropdown-new {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  min-width: 120px;
+  z-index: 100;
+  margin-top: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.publish-dropdown-item-new {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.publish-dropdown-item-new:hover {
+  color: #024a41;
 }

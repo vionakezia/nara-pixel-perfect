@@ -60,7 +60,7 @@ const ForgotPasswordModal = ({ isOpen, onClose, onBackToLogin }: ForgotPasswordM
             <p className="modal-subtitle">Enter your email and we will send you a link to reset your password</p>
             
             <form onSubmit={handleForgotSubmit}>
-              <div className="modal-input-with-icon modal-input-compact">
+              <div className="modal-input-with-icon modal-input-compact modal-input-icon-centered">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -147,7 +147,7 @@ const ForgotPasswordModal = ({ isOpen, onClose, onBackToLogin }: ForgotPasswordM
 
         {step === "success" && (
           <>
-            <h2 className="modal-title modal-title-accent">Password Reset Succesful!</h2>
+            <h2 className="modal-title modal-title-white">Password Reset Succesful!</h2>
             <p className="modal-subtitle">
               Your new password is ready to use.<br />
               Sign in to your NARA account with your updated password.

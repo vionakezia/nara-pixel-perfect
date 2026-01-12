@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../components/ProfileDropdown";
 import fontNara from "@/assets/fontnara.png";
@@ -10,26 +10,6 @@ const fonts = ["Inter", "Arial", "Georgia", "Times New Roman", "Courier New", "V
 const Editor = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  
-  // Title formatting states
-  const [titleFontSize, setTitleFontSize] = useState("24");
-  const [titleTextColor, setTitleTextColor] = useState("#000000");
-  const [titleIsBold, setTitleIsBold] = useState(true);
-  const [titleIsItalic, setTitleIsItalic] = useState(false);
-  const [titleIsUnderline, setTitleIsUnderline] = useState(false);
-  
-  // Content formatting states
-  const [contentFontSize, setContentFontSize] = useState("14");
-  const [contentTextColor, setContentTextColor] = useState("#000000");
-  const [contentIsBold, setContentIsBold] = useState(false);
-  const [contentIsItalic, setContentIsItalic] = useState(false);
-  const [contentIsUnderline, setContentIsUnderline] = useState(false);
-  const [fontFamily, setFontFamily] = useState("Inter");
-  
-  // Active field for formatting
-  const [activeField, setActiveField] = useState<"title" | "content">("title");
   
   // Dropdown states
   const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false);
@@ -40,6 +20,13 @@ const Editor = () => {
   // Image upload
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  
+  // Current formatting for display
+  const [currentFontSize, setCurrentFontSize] = useState("14");
+  const [currentColor, setCurrentColor] = useState("#000000");
+  const [currentFont, setCurrentFont] = useState("Inter");
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -52,8 +39,51 @@ const Editor = () => {
     }
   };
 
+  const applyFormat = useCallback((command: string, value?: string) => {
+    document.execCommand(command, false, value);
+  }, []);
+
+  const handleFontSizeChange = (size: string) => {
+    // Convert px size to execCommand size (1-7 scale)
+    const sizeMap: { [key: string]: string } = {
+      "10": "1", "12": "2", "14": "3", "16": "4", "18": "5", "20": "5", 
+      "24": "6", "28": "6", "32": "7", "36": "7", "48": "7"
+    };
+    applyFormat('fontSize', sizeMap[size] || "3");
+    setCurrentFontSize(size);
+    setShowFontSizeDropdown(false);
+  };
+
+  const handleColorChange = (color: string) => {
+    applyFormat('foreColor', color);
+    setCurrentColor(color);
+    setShowColorDropdown(false);
+  };
+
+  const handleFontChange = (font: string) => {
+    applyFormat('fontName', font);
+    setCurrentFont(font);
+    setShowFontDropdown(false);
+  };
+
+  const handleBold = () => {
+    applyFormat('bold');
+  };
+
+  const handleItalic = () => {
+    applyFormat('italic');
+  };
+
+  const handleUnderline = () => {
+    applyFormat('underline');
+  };
+
   const handlePublish = (status: "published" | "draft" | "archive") => {
-    if (!title.trim() && !content.trim()) {
+    const title = titleRef.current?.innerText?.trim() || "";
+    const content = contentRef.current?.innerHTML || "";
+    const titleHTML = titleRef.current?.innerHTML || "";
+    
+    if (!title && !contentRef.current?.innerText?.trim()) {
       setShowPublishDropdown(false);
       return;
     }
@@ -61,19 +91,9 @@ const Editor = () => {
     // Store the content in localStorage so Profile can access it
     const publishedContent = {
       title,
+      titleHTML,
       content,
       image: uploadedImage,
-      titleFontSize,
-      titleTextColor,
-      titleIsBold,
-      titleIsItalic,
-      titleIsUnderline,
-      contentFontSize,
-      contentTextColor,
-      contentIsBold,
-      contentIsItalic,
-      contentIsUnderline,
-      fontFamily,
       status,
       publishedAt: new Date().toISOString()
     };
@@ -81,35 +101,6 @@ const Editor = () => {
     setShowPublishDropdown(false);
     navigate("/profile");
   };
-
-  const getCurrentFontSize = () => activeField === "title" ? titleFontSize : contentFontSize;
-  const setCurrentFontSize = (size: string) => activeField === "title" ? setTitleFontSize(size) : setContentFontSize(size);
-  const getCurrentTextColor = () => activeField === "title" ? titleTextColor : contentTextColor;
-  const setCurrentTextColor = (color: string) => activeField === "title" ? setTitleTextColor(color) : setContentTextColor(color);
-  const getCurrentIsBold = () => activeField === "title" ? titleIsBold : contentIsBold;
-  const setCurrentIsBold = (val: boolean) => activeField === "title" ? setTitleIsBold(val) : setContentIsBold(val);
-  const getCurrentIsItalic = () => activeField === "title" ? titleIsItalic : contentIsItalic;
-  const setCurrentIsItalic = (val: boolean) => activeField === "title" ? setTitleIsItalic(val) : setContentIsItalic(val);
-  const getCurrentIsUnderline = () => activeField === "title" ? titleIsUnderline : contentIsUnderline;
-  const setCurrentIsUnderline = (val: boolean) => activeField === "title" ? setTitleIsUnderline(val) : setContentIsUnderline(val);
-
-  const getTitleStyle = () => ({
-    fontSize: `${titleFontSize}px`,
-    color: titleTextColor,
-    fontWeight: titleIsBold ? 'bold' : 'normal',
-    fontStyle: titleIsItalic ? 'italic' : 'normal',
-    textDecoration: titleIsUnderline ? 'underline' : 'none',
-    fontFamily: fontFamily,
-  });
-
-  const getContentStyle = () => ({
-    fontSize: `${contentFontSize}px`,
-    color: contentTextColor,
-    fontWeight: contentIsBold ? 'bold' : 'normal',
-    fontStyle: contentIsItalic ? 'italic' : 'normal',
-    textDecoration: contentIsUnderline ? 'underline' : 'none',
-    fontFamily: fontFamily,
-  });
 
   const closeAllDropdowns = () => {
     setShowFontSizeDropdown(false);
@@ -159,22 +150,6 @@ const Editor = () => {
           />
           
           <div className="toolbar-options">
-            {/* Field Selector */}
-            <div className="toolbar-field-selector">
-              <button 
-                className={`field-btn ${activeField === 'title' ? 'active' : ''}`}
-                onClick={() => setActiveField('title')}
-              >
-                Title
-              </button>
-              <button 
-                className={`field-btn ${activeField === 'content' ? 'active' : ''}`}
-                onClick={() => setActiveField('content')}
-              >
-                Content
-              </button>
-            </div>
-
             {/* Font Size Dropdown */}
             <div className="toolbar-dropdown-container">
               <button 
@@ -184,18 +159,15 @@ const Editor = () => {
                   setShowFontSizeDropdown(!showFontSizeDropdown);
                 }}
               >
-                {getCurrentFontSize()} px <span className="chevron">▼</span>
+                {currentFontSize} px <span className="chevron">▼</span>
               </button>
               {showFontSizeDropdown && (
                 <div className="toolbar-dropdown">
                   {fontSizes.map(size => (
                     <button 
                       key={size} 
-                      className={`dropdown-item ${getCurrentFontSize() === size ? 'active' : ''}`}
-                      onClick={() => {
-                        setCurrentFontSize(size);
-                        setShowFontSizeDropdown(false);
-                      }}
+                      className={`dropdown-item ${currentFontSize === size ? 'active' : ''}`}
+                      onClick={() => handleFontSizeChange(size)}
                     >
                       {size} px
                     </button>
@@ -213,7 +185,7 @@ const Editor = () => {
                   setShowColorDropdown(!showColorDropdown);
                 }}
               >
-                <span className="color-indicator" style={{ backgroundColor: getCurrentTextColor(), border: getCurrentTextColor() === '#FFFFFF' ? '1px solid #ccc' : 'none' }}></span>
+                <span className="color-indicator" style={{ backgroundColor: currentColor, border: currentColor === '#FFFFFF' ? '1px solid #ccc' : 'none' }}></span>
                 Color <span className="chevron">▼</span>
               </button>
               {showColorDropdown && (
@@ -221,12 +193,9 @@ const Editor = () => {
                   {colors.map(color => (
                     <button 
                       key={color} 
-                      className={`color-option ${getCurrentTextColor() === color ? 'active' : ''}`}
+                      className={`color-option ${currentColor === color ? 'active' : ''}`}
                       style={{ backgroundColor: color, border: color === '#FFFFFF' ? '1px solid #ccc' : 'none' }}
-                      onClick={() => {
-                        setCurrentTextColor(color);
-                        setShowColorDropdown(false);
-                      }}
+                      onClick={() => handleColorChange(color)}
                     />
                   ))}
                 </div>
@@ -235,24 +204,24 @@ const Editor = () => {
             
             {/* Bold Button */}
             <button 
-              className={`toolbar-option format-btn ${getCurrentIsBold() ? 'active' : ''}`}
-              onClick={() => setCurrentIsBold(!getCurrentIsBold())}
+              className="toolbar-option format-btn"
+              onClick={handleBold}
             >
               B
             </button>
             
             {/* Italic Button */}
             <button 
-              className={`toolbar-option format-btn italic ${getCurrentIsItalic() ? 'active' : ''}`}
-              onClick={() => setCurrentIsItalic(!getCurrentIsItalic())}
+              className="toolbar-option format-btn italic"
+              onClick={handleItalic}
             >
               I
             </button>
             
             {/* Underline Button */}
             <button 
-              className={`toolbar-option format-btn underline ${getCurrentIsUnderline() ? 'active' : ''}`}
-              onClick={() => setCurrentIsUnderline(!getCurrentIsUnderline())}
+              className="toolbar-option format-btn underline"
+              onClick={handleUnderline}
             >
               U
             </button>
@@ -266,19 +235,16 @@ const Editor = () => {
                   setShowFontDropdown(!showFontDropdown);
                 }}
               >
-                {fontFamily} <span className="chevron">▼</span>
+                {currentFont} <span className="chevron">▼</span>
               </button>
               {showFontDropdown && (
                 <div className="toolbar-dropdown font-dropdown">
                   {fonts.map(font => (
                     <button 
                       key={font} 
-                      className={`dropdown-item ${fontFamily === font ? 'active' : ''}`}
+                      className={`dropdown-item ${currentFont === font ? 'active' : ''}`}
                       style={{ fontFamily: font }}
-                      onClick={() => {
-                        setFontFamily(font);
-                        setShowFontDropdown(false);
-                      }}
+                      onClick={() => handleFontChange(font)}
                     >
                       {font}
                     </button>
@@ -301,46 +267,43 @@ const Editor = () => {
               </button>
             </div>
           )}
-          <input
-            type="text"
-            className="editor-title-input"
-            placeholder="Write a title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onFocus={() => setActiveField('title')}
-            style={getTitleStyle()}
+          <div
+            ref={titleRef}
+            className="editor-title-editable"
+            contentEditable
+            data-placeholder="Write a title"
+            style={{ fontSize: '36px', fontWeight: 'bold' }}
           />
           <div className="editor-divider"></div>
-          <textarea
-            className="editor-textarea"
-            placeholder="Start writing here.."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            onFocus={() => setActiveField('content')}
-            style={getContentStyle()}
+          <div
+            ref={contentRef}
+            className="editor-content-editable"
+            contentEditable
+            data-placeholder="Start writing here.."
+            style={{ fontSize: '14px' }}
           />
         </div>
 
         <div className="publish-dropdown-container">
           <button 
-            className="btn btn-primary publish-btn" 
+            className="publish-btn-new" 
             onClick={() => setShowPublishDropdown(!showPublishDropdown)}
           >
             Publish
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="publish-chevron">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="publish-chevron">
               <path d="m6 9 6 6 6-6"/>
             </svg>
           </button>
           {showPublishDropdown && (
-            <div className="publish-dropdown">
-              <button className="publish-dropdown-item" onClick={() => handlePublish("published")}>
-                <span className="publish-dropdown-text">Publish</span>
+            <div className="publish-dropdown-new">
+              <button className="publish-dropdown-item-new" onClick={() => handlePublish("published")}>
+                Publish
               </button>
-              <button className="publish-dropdown-item" onClick={() => handlePublish("draft")}>
-                <span className="publish-dropdown-text">Draft</span>
+              <button className="publish-dropdown-item-new" onClick={() => handlePublish("draft")}>
+                Draft
               </button>
-              <button className="publish-dropdown-item" onClick={() => handlePublish("archive")}>
-                <span className="publish-dropdown-text">Archive</span>
+              <button className="publish-dropdown-item-new" onClick={() => handlePublish("archive")}>
+                Archive
               </button>
             </div>
           )}
